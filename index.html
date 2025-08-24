@@ -8,23 +8,36 @@
     <style> .reset {margin-top: 25px}
             .exit {margin-top: 25px}
             .posName {min-height: 20px}
+            .loginPanel { display: flex}
             .invisible {display: none}
+            button {min-height: 30px;
+                    min-width: 50px;
+                font-size: 14px;}
+            .login {min-height: unset;}
+            .exit {min-height: unset;}
     </style>
 </head>
 <body class="body">
-    <div class="loginPanel">
-        <p>Введите пароль доступа: </p>
-        <input class="inputLogin" type="number">
+    <div class="loginPanel" style="margin: 0; margin-top: 15px; position: relative;">
+        <p style="margin: 0;">Введите пароль доступа: </p>
+        <input class="inputLogin" type="number" style="width: 40px; padding-left: 20px; margin-left: 10px; margin-right: 10px;">
         <button class="login">Вход</button>
+        <div style="position: absolute; left: 10px; top: 50px; border: 1px dashed blue; padding: 10px"><p style="text-align: center; font-size: 18px;">Пароли:</p><p>1 - кладовщик</p><p>2 - водитель ричтрака</p></div>
     </div>
     <div class="app invisible">
-        <p class="user">Вы вошли в роли: </p>
+        <div style="display: flex">
+        <p class="user" style="margin: 0; margin-right: 30px;">Вы вошли в роли: </p>
+        <button class="exit" style="margin-top: 0;">выход</button>
+        </div>
         <p class="posName"></p>
         <p class="question">Введите параметы позиции:</p>
         <div class="buttons">
         </div>
         <button class="reset">сброс</button>
-        <button class="exit">выход</button>
+        <div >
+            <p>Задания, ожидающие выполнения: </p>
+            <div class="queue"></div>
+        </div>
     </div>
 </body>
 </html>
