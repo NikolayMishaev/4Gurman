@@ -102,6 +102,7 @@ const posName = document.querySelector(".posName");
 const butReset = document.querySelector(".reset");
 const question = document.querySelector(".question");
 const queue = document.querySelector(".queue");
+const progress = document.querySelector('.progress')
 
 let currentUser = 0;
 let obj = DB;
@@ -175,8 +176,10 @@ body.addEventListener("click", (e) => {
     }
     if (e.target.className === "login") {
       if (inputLogin.value === "1") {
+        progress.textContent = 'Задания, ожидающие выполнения:' 
         queue.innerHTML = "";
         selectedPosition.forEach((i) => addButton(i[5], queue));
+        if (selectedPosition.length === 0) progress.textContent = ''
         loginPanel.classList.add("invisible");
         app.classList.remove("invisible");
         user.textContent += "кладовщик";
@@ -187,6 +190,7 @@ body.addEventListener("click", (e) => {
         displayButtons();
       }
       if (inputLogin.value === "2") {
+        progress.textContent = ''
         queue.innerHTML = "";
         loginPanel.classList.add("invisible");
         app.classList.remove("invisible");
@@ -208,6 +212,7 @@ body.addEventListener("click", (e) => {
     if (Array.isArray(obj)) {
       if (e.target.textContent === "да") {
         question.textContent = "Введите параметы позиции:";
+        progress.textContent = 'Задания, ожидающие выполнения:'
         adress.push(
           ...objCopy.splice(
             objCopy.findIndex((i) => i === cell),
