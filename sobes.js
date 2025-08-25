@@ -17,7 +17,13 @@ const DB = {
         },
         индейка: { 23.07: ["4 35 4", "3 33 2"] },
       },
-      щенки: {},
+      щенки: {
+        курица: {
+          '08.08': ["2 12 4", "1 13 6"],
+          14.08: ["3 17 5", "2 20 4", "5 24 1"],
+        },
+        говядина: { 18.07: ["4 32 3", "3 22 4"] },
+      },
     },
   },
   340: {
@@ -176,6 +182,7 @@ body.addEventListener("click", (e) => {
     }
     if (e.target.className === "login") {
       if (inputLogin.value === "1") {
+        posName.textContent = "";
         progress.textContent = 'Задания, ожидающие выполнения:' 
         queue.innerHTML = "";
         selectedPosition.forEach((i) => addButton(i[5], queue));
@@ -190,6 +197,7 @@ body.addEventListener("click", (e) => {
         displayButtons();
       }
       if (inputLogin.value === "2") {
+        posName.textContent = "";
         progress.textContent = ''
         queue.innerHTML = "";
         loginPanel.classList.add("invisible");
