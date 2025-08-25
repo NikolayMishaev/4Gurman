@@ -144,6 +144,10 @@ body.addEventListener("click", (e) => {
     user.textContent = "Вы вошли в роли: ";
     loginPanel.classList.remove("invisible");
     currentUser = 0;
+    obj = DB;
+    adress = [];
+    objCopy = [];
+    cell = "";
     return;
   }
   if (e.target.className === "reset") {
