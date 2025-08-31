@@ -2,12 +2,29 @@ const DB = {
   850: {
     Brunch: {
       собаки: {
+        рубец: {},
         ягненок: {},
       },
     },
     Вкусмясина: {
       собаки: {
         говядина: {},
+        индейка: {},
+        потрошки: {},
+      },
+    }
+  },
+    340: {
+    "Золотая_линия": {
+      собаки: {
+        страус: {},
+        утка: {},
+      },
+    },
+    Вкусмясина: {
+      собаки: {
+        печень: {},
+        сердце: {},
       },
     }
   },
@@ -33,7 +50,7 @@ async function handleFileAsync(e) {
       posDate.push(i[1]["w"]);
     }
   });
-  console.log([adress, position, posDate]);
+  // console.log([adress, position, posDate]);
   const arrayPos = []
   position.forEach((i,c)=> {
     if (c > 0) {
@@ -47,7 +64,7 @@ async function handleFileAsync(e) {
   })
   
 
-  console.log(DB);
+  // console.log(DB);
 }
 const te2 = document.querySelector(".test");
 te2.addEventListener("change", handleFileAsync, false);
@@ -59,17 +76,66 @@ downloadEx.addEventListener("click", () => {
                                         // СКАЧИВАНИЕ EXCEL
   var workbook = XLSX.utils.book_new();
   const rows = [];
+        for (let key in DB['340']['Вкусмясина']['собаки']['печень']) {
+    DB['340']['Вкусмясина']['собаки']['печень'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "340 Вкусмясина собаки печень",
+      дата: key,
+    }))
+  }
+      for (let key in DB['340']['Вкусмясина']['собаки']['сердце']) {
+    DB['340']['Вкусмясина']['собаки']['сердце'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "340 Вкусмясина собаки сердце",
+      дата: key,
+    }))
+  }
+      for (let key in DB['340']['Золотая_линия']['собаки']['утка']) {
+    DB['340']['Золотая_линия']['собаки']['утка'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "340 Золотая_линия собаки утка",
+      дата: key,
+    }))
+  }
+    for (let key in DB['340']['Золотая_линия']['собаки']['страус']) {
+    DB['340']['Золотая_линия']['собаки']['страус'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "340 Золотая_линия собаки страус",
+      дата: key,
+    }))
+  }
   for (let key in DB['850']['Вкусмясина']['собаки']['говядина']) {
     DB['850']['Вкусмясина']['собаки']['говядина'][key].forEach(i=>rows.push({
-      адрес: i,
+      адрес: i.split(' ').join(''),
       название_позиции: "850 Вкусмясина собаки говядина",
+      дата: key,
+    }))
+  }
+    for (let key in DB['850']['Вкусмясина']['собаки']['индейка']) {
+    DB['850']['Вкусмясина']['собаки']['индейка'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "850 Вкусмясина собаки индейка",
+      дата: key,
+    }))
+  }
+    for (let key in DB['850']['Вкусмясина']['собаки']['потрошки']) {
+    DB['850']['Вкусмясина']['собаки']['потрошки'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "850 Вкусмясина собаки потрошки",
       дата: key,
     }))
   }
     for (let key in DB['850']['Brunch']['собаки']['ягненок']) {
     DB['850']['Brunch']['собаки']['ягненок'][key].forEach(i=>rows.push({
-      адрес: i,
+      адрес: i.split(' ').join(''),
       название_позиции: "850 Brunch собаки ягненок",
+      дата: key,
+    }))
+  }
+      for (let key in DB['850']['Brunch']['собаки']['рубец']) {
+    DB['850']['Brunch']['собаки']['рубец'][key].forEach(i=>rows.push({
+      адрес: i.split(' ').join(''),
+      название_позиции: "850 Brunch собаки рубец",
       дата: key,
     }))
   }
@@ -90,7 +156,10 @@ const question = document.querySelector(".question");
 const queue = document.querySelector(".queue");
 const progress = document.querySelector(".progress");
 const adminPanel = document.querySelector(".adminPanel")
+const listRemovedPanel = document.querySelector(".listRemovedPanel")
+const listRemoved = document.querySelector('.listRemoved')
 
+let listRemovedPositions = []
 let currentUser = 0;
 let obj = DB;
 let adress = [];
@@ -157,6 +226,19 @@ body.addEventListener("click", (e) => {
     return;
   }
   if (e.target.tagName === "BUTTON") {
+    if (inputLogin.value === '0') {
+      if (e.target.className === 'but') {
+        posName.textContent = ''
+        posName.textContent = 'данный функционал в разработке'
+        return
+      }
+    //   posName.textContent = ''
+      // if (listRemovedPositions.length) {
+    //     let removedAdress = listRemovedPositions.find(j=>j.find(i=>i[7] === e.target.textContent));
+    //     console.log(removedAdress)
+    //     if (removedAdress) removedAdress.forEach((i) => (posName.textContent += i + "  >>  "));
+      // }
+    }
     if (obj === DB) {
       posName.textContent = ''
     }
@@ -170,10 +252,14 @@ body.addEventListener("click", (e) => {
         return;
       }
       if (e.target.textContent === "да") {
+        // listRemovedPositions.push(selectedPosition)
+        // listRemovedPositions = Array.from(new Set(listRemovedPositions))
+        // console.log(listRemovedPositions)
         posName.textContent = "";
         question.textContent = "Текущие задания:";
         obj = [];
         selectedPosition = selectedPosition.filter((i) => i[7] !== cellDone[7]);
+        
         selectedPosition.forEach((i) => obj.push(i[7]));
         displayButtons();
         if (selectedPosition.length === 0) question.textContent = "Заданий нет";
@@ -189,10 +275,10 @@ body.addEventListener("click", (e) => {
     if (e.target.className === "login") {
       if (users[inputLogin.value]) {
         posName.textContent = "";
-        progress.textContent = "Задания, ожидающие выполнения:";
+        // progress.textContent = "Задания, ожидающие выполнения:";
         queue.innerHTML = "";
         selectedPosition.forEach((i) => addButton(i[7], queue));
-        if (selectedPosition.length === 0) progress.textContent = "";
+        // if (selectedPosition.length === 0) progress.textContent = "";
         loginPanel.classList.add("invisible");
         app.classList.remove("invisible");
         if (inputLogin.value !== '0') user.textContent += `кладовщик ${users[inputLogin.value]}`;
@@ -219,11 +305,14 @@ body.addEventListener("click", (e) => {
         displayButtons();
       }
       if (inputLogin.value === '0') {
+        // listRemovedPanel.classList.remove("invisible")
         currentUser = users[inputLogin.value];
         user.textContent += `${users[inputLogin.value]}`;
         loginPanel.classList.add("invisible");
         adminPanel.classList.remove("invisible");
         app.classList.remove("invisible");
+        posName.textContent = ''
+        listRemovedPositions.forEach(i=>i.forEach(j=>addButton(j[7],listRemoved, 'but')))
       }
       return;
     }
@@ -233,7 +322,7 @@ body.addEventListener("click", (e) => {
     if (Array.isArray(obj)) {
       if (e.target.textContent === "да") {
         question.textContent = "Введите параметы позиции:";
-        progress.textContent = "Задания, ожидающие выполнения:";
+        // progress.textContent = "Задания, ожидающие выполнения:";
         adress.push(
           ...objCopy.splice(
             objCopy.findIndex((i) => i === cell),
@@ -242,8 +331,8 @@ body.addEventListener("click", (e) => {
         );
         selectedPosition.push(adress);
         queue.innerHTML = "";
-        console.log(selectedPosition)
-        console.log(selectedPosition)
+        // console.log(selectedPosition)
+        // console.log(selectedPosition)
         selectedPosition.forEach((i) => addButton(i[7], queue));
         if (!objCopy.length) {
           delete DB[adress[0]][adress[1]][adress[2]][adress[3]][adress[4]];
@@ -294,12 +383,12 @@ body.addEventListener("click", (e) => {
   }
 });
 
-function addButton(text, parent) {
+function addButton(text, parent, className) {
   const newBut = document.createElement("button");
   newBut.style.marginRight = "5px";
   newBut.innerHTML = text;
   if (parent) {
-    newBut.className = "progress";
+    newBut.className = className || "progress";
     parent.append(newBut);
   } else buttons.append(newBut);
 }
