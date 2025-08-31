@@ -4,40 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4Gurman</title>
-    <script defer src="sobes.js"></script>
-    <style> .reset {margin-top: 25px}
+    <script defer type="module" src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script type="module" defer src="main.js"></script>
+    <style> .reset {margin-top: 10px}
             .exit {margin-top: 25px}
             .posName {min-height: 20px}
             .loginPanel { display: flex}
             .invisible {display: none}
             button {min-height: 30px;
                     min-width: 50px;
-                font-size: 14px;}
+                    font-size: 14px;}
+            .buttons button {
+                margin-top: 5px;
+                background-color: lightblue; 
+                border-radius: 5px; 
+                border: solid 1px black;
+            }
             .login {min-height: unset;}
             .exit {min-height: unset;}
     </style>
 </head>
 <body class="body">
-    <div class="loginPanel" style="margin: 0; margin-top: 15px; position: relative;">
+    <div class="loginPanel" style="margin: 0; margin-top: 15px; margin-bottom: 5px; position: relative;">
         <p style="margin: 0;">Введите пароль доступа: </p>
         <input class="inputLogin" type="number" style="width: 40px; padding-left: 20px; margin-left: 10px; margin-right: 10px;">
-        <button class="login">Вход</button>
-        <div style="position: absolute; left: 10px; top: 50px; border: 1px dashed blue; padding: 10px"><p style="text-align: center; font-size: 18px;">Пароли:</p><p>1 - кладовщик</p><p>2 - водитель ричтрака</p></div>
+        <button class="login" style="background-color: lightgreen; border-radius: 5px; border: solid 1px black;">Вход</button>
+        <div style="position: absolute; left: 40px; top: 40px; border: 1px dashed blue; padding: 10px"><p style="text-align: center; font-size: 18px; margin: 0">Пароли:</p><p>0 - начальник склада</p><p>1 - водитель ричтрака Сергей</p><p>2 - кладовщик Горелова А.С.</p><p>3 - кладовщик Пигорев Д.В.</p><p>4 - кладовщик Минакова О.А.</p><p>5 - кладовщик Тарасеев А.С.</p></div>
     </div>
     <div class="app invisible">
-        <div style="display: flex">
+        <div style="display: flex; border: dashed 1px black; padding: 5px;">
         <p class="user" style="margin: 0; margin-right: 30px;">Вы вошли в роли: </p>
-        <button class="exit" style="margin-top: 0;">выход</button>
+        <button class="exit" style="margin-top: 0; background-color: brown; border-radius: 5px; border: solid 1px black; color: white;">выход</button>
         </div>
-        <p class="posName" style="min-height: 40px;"></p>
-        <p class="question">Введите параметы позиции:</p>
-        <div class="buttons">
+        <p class="posName" style="min-height: 40px; border: solid 1px black; padding: 5px; margin: 5px 0;"></p>
+        <div style="border: solid 1px black; padding: 5px;">
+            <p class="question" style="margin: 0">Введите параметы позиции:</p>
+            <div class="buttons">
+            </div>
+            <button class="reset" style="background-color: brown; border-radius: 5px; border: solid 1px black; color: white;">сброс</button>
         </div>
-        <button class="reset">сброс</button>
-        <div >
-            <p class="progress"></p>
+        <div style="border: solid 1px black; margin: 5px 0; padding: 5px;">
+            <p class="progress" style="margin: 0; margin-bottom: 5px;"></p>
             <div class="queue"></div>
         </div>
+    </div>
+    <div class="adminPanel invisible" style="margin: 5px 0; padding: 5px; border: solid 1px black;">
+        <input class="test" type="file" name="Загрузить Excel" id="">
+        <button class="downloadEx" style="min-height: 20px;">Скачать в Excel</button>
     </div>
 </body>
 </html>
